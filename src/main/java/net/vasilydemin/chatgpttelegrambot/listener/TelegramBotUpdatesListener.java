@@ -135,6 +135,10 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             // send user back the first response
             sendMessage(chatId, response.getChoices().get(0).getMessage().getContent());
 
+        } else if(updateType == UpdateType.COMMAND &&
+                update.message().text().equalsIgnoreCase(Commands.START.commandText)) {
+            sendMessage(chatId, Messages.WELL_ONE_MORE_TIME.messageText);
+            sendMessage(chatId, Messages.WELCOME_TO_THE_CHATBOT.messageText);
         }
 
     }
