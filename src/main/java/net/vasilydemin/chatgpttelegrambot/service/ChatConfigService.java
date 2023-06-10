@@ -29,7 +29,7 @@ public class ChatConfigService {
      * return the chat stored in the database
      */
     public ChatConfig addChatConfig(ChatConfig chatConfig) {
-        logger.info("Method \"ChatConfigService.addChatConfig()\" was called");
+        // logger.info("Method \"ChatConfigService.addChatConfig()\" was called");
         return chatConfigRepository.save(chatConfig);
     }
     /**
@@ -40,7 +40,7 @@ public class ChatConfigService {
      * return ChatConfig  object saved in the database
      */
     public Optional<ChatConfig> editChatConfig(ChatConfig chatConfig) {
-        logger.info("Method \"ChatConfigService.editChatConfig()\" was called");
+        // logger.info("Method \"ChatConfigService.editChatConfig()\" was called");
         Optional<ChatConfig> result = chatConfigRepository.findById(chatConfig.getId());
         if(result.isEmpty()) {
             return Optional.empty();
@@ -58,7 +58,7 @@ public class ChatConfigService {
      * return found chat
      */
     public Optional<ChatConfig> findByChatId(Long chatId) {
-        logger.info("Method \"ChatConfigService.findByChatId()\" was called");
+        // logger.info("Method \"ChatConfigService.findByChatId()\" was called");
         return chatConfigRepository.findByChatId(chatId);
     }
 

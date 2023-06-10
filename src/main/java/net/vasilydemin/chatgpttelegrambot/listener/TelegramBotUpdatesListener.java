@@ -20,8 +20,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,7 +73,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     public int process(List<Update> updates) {
         updates.forEach(update -> {
             // Processing updates
-            logger.info("Processing update: {}", update);
+            // logger.info("Processing update: {}", update);
             Long chatId = 0L;
             String firstName = null, lastName = null, nickName = null;
             ChatState chatState;
@@ -126,7 +130,18 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             ChatRequest request = new ChatRequest(model, update.message().text());
 
             // call the API
-            ChatResponse response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
+            ChatResponse response = null;
+            try {
+                response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
+            } catch(RestClientException e) {
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                String stackTrace = sw.toString();
+                logger.error("Error during restTemplate.postForObject method invocation:\n" + stackTrace);
+                sendMessage(chatId, Messages.OH_SOMETHING_GOT_WRONG.messageText + e.getMessage()
+                        + Messages.YOU_NEED_TO_CALL_SUPPORT.messageText);
+            }
 
             if(response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
                 sendMessage(chatId, Messages.NO_RESPONSE.messageText);
@@ -177,12 +192,10 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     private void sendMessage(Long chatId, String message) {
         SendMessage sendMessage = new SendMessage(chatId, message);
         SendResponse response = telegramBot.execute(sendMessage);
-        if (response != null && response.isOk()) {
-            logger.info("message: {} is sent ", message);
-        } else if(response != null) {
-            logger.warn("Message was not sent. Error code:  " + response.errorCode());
-        } else {
-            logger.warn("Message was not sent. Response is null");
+        if(response != null && !response.isOk()) {
+            logger.error("Message was not sent. Error code:  " + response.errorCode());
+        } else if(response == null) {
+            logger.error("Message was not sent. Response is null");
         }
     }
 
