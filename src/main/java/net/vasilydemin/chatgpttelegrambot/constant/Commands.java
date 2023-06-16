@@ -11,7 +11,9 @@ public enum Commands {
 
     START("/start"),
     HELP("/help"),
-    MENU("/menu");
+    MENU("/menu"),
+    SAFETY("/safety"),
+    SUPPORT("/support");
 
     public final String commandText;
 
