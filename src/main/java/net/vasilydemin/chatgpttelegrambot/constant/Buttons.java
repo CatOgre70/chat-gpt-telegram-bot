@@ -5,18 +5,10 @@ import java.util.Map;
 
 public enum Buttons {
 
-    // Main menu "Chose shelter"
-    DOG_SHELTER("Приют для собак", "DogShelter", ButtonType.CALLBACK, null),
-    CAT_SHELTER("Приют для кошек", "CatShelter", ButtonType.CALLBACK, null),
-
     // Default root menu
-    SHELTER_INFO("Информация о приюте", "ShelterInfo", ButtonType.CALLBACK, null),
-    ANIMAL_INFO("Как взять животное", "AnimalInfo", ButtonType.CALLBACK, null),
-    DAILY_REPORT("Отправить отчет о питомце", "DailyReport", ButtonType.CALLBACK, null),
-
-    // Service buttons
-    HELP("Справка - как работать с ботом", "help", ButtonType.CALLBACK, null);
-
+    HELP("Справка - как работать с ботом", "help", ButtonType.CALLBACK, null),
+    SAFETY("Информация о ваших данных", "safety", ButtonType.CALLBACK, null),
+    SUPPORT("Поговорить с поддержкой", "support", ButtonType.CALLBACK, null);
 
     public final String bText, bCallBack, url;
     public final ButtonType bType;

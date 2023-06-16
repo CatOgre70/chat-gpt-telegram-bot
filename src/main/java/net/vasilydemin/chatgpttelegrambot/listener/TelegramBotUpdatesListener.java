@@ -25,7 +25,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -154,6 +153,19 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                 update.message().text().equalsIgnoreCase(Commands.START.commandText)) {
             sendMessage(chatId, Messages.WELL_ONE_MORE_TIME.messageText);
             sendMessage(chatId, Messages.WELCOME_TO_THE_CHATBOT.messageText);
+        } else if ((updateType == UpdateType.COMMAND &&
+                update.message().text().equalsIgnoreCase(Commands.HELP.commandText)) ||
+                (updateType == UpdateType.CALL_BACK_QUERY &&
+                        update.callbackQuery().data().equals(Buttons.HELP.bCallBack))) {
+            sendMessage(chatId, Messages.HELP.messageText);
+        } else if (updateType == UpdateType.COMMAND &&
+                update.message().text().equalsIgnoreCase(Commands.MENU.commandText)) {
+            sendMenu(chatId, Messages.CONTEXT_MENU.messageText, Buttons.SAFETY, Buttons.HELP);
+        } else if ((updateType == UpdateType.COMMAND &&
+                update.message().text().equalsIgnoreCase(Commands.SAFETY.commandText)) ||
+                (updateType == UpdateType.CALL_BACK_QUERY &&
+                        update.callbackQuery().data().equals(Buttons.SAFETY.bCallBack))){
+            sendMessage(chatId, Messages.SAFETY.messageText);
         }
 
     }
@@ -212,9 +224,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         SendMessage message = new SendMessage(chatId, menuHeader);
         message.replyMarkup(inlineKeyboard);
         SendResponse response = telegramBot.execute(message);
-        if (response != null && response.isOk()) {
-            logger.info("menu: {} is sent ", message);
-        } else if (response != null){
+        if (response != null && !response.isOk()){
             logger.error("Response error: {} {}", response.errorCode(), response.message());
         } else {
             logger.error("Response error: response is null");
