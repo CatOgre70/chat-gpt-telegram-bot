@@ -14,16 +14,18 @@ Code for calling OpenAI API is based on the following Baeldung article: https://
 
 Telegram API Java library is https://github.com/pengrad/java-telegram-bot-api 
 
-To start application please use jar file from this repository. Last version is 0.5.1. Command line for starting jar
+To start application please use jar file from this repository. Last version is 0.5 Command line for starting jar
 file:
 
-java -jar -D"telegram.bot.token={TelegramBotToken}" -D"spring.datasource.username={database user name}"
+java -jar -D"openai.api.key={OpenAPIKey}" -D"telegram.bot.token={TelegramBotToken}" 
+-D"spring.datasource.username={database user name}"
 -D"spring.datasource.password={database user password}"
 -D"spring.datasource.url=jdbc:postgresql://{database server IP address}/{database name}"
-animal-shelter-telegram-bot-0.5.1.jar
+chat-gpt-telegram-bot-0.5.jar
 
 You can also define environment variables in your operating system:
 
+openai.api.key={OpenAPIKey}
 telegram.bot.token={TelegramBotToken}
 spring.datasource.username={database user name}
 spring.datasource.password={database user password}
@@ -31,7 +33,7 @@ spring.datasource.url=jdbc:postgresql://{database server IP address}/{database n
 
 Command line to start application in this case will be
 
-java -jar animal-shelter-telegram-bot-0.5.1.jar
+java -jar chat-gpt-telegram-bot-0.5.jar
 
 **_Development team_**
 
