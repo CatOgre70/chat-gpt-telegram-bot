@@ -37,7 +37,9 @@ spring.datasource.url=jdbc:postgresql://{database server IP address}/{database n
 
 Command line to start application in this case will be
 
+```
 java -jar chat-gpt-telegram-bot-0.5.jar
+```
 
 # Development team
 
