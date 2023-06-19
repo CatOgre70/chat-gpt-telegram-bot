@@ -27,11 +27,13 @@ chat-gpt-telegram-bot-0.5.jar
 
 You can also define environment variables in your operating system:
 
-openai.api.key={OpenAPIKey}
-telegram.bot.token={TelegramBotToken}
-spring.datasource.username={database user name}
-spring.datasource.password={database user password}
+```
+openai.api.key={OpenAPIKey}  
+telegram.bot.token={TelegramBotToken}  
+spring.datasource.username={database user name}  
+spring.datasource.password={database user password}  
 spring.datasource.url=jdbc:postgresql://{database server IP address}/{database name}
+```
 
 Command line to start application in this case will be
 
