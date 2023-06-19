@@ -160,12 +160,17 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             sendMessage(chatId, Messages.HELP.messageText);
         } else if (updateType == UpdateType.COMMAND &&
                 update.message().text().equalsIgnoreCase(Commands.MENU.commandText)) {
-            sendMenu(chatId, Messages.CONTEXT_MENU.messageText, Buttons.SAFETY, Buttons.HELP);
+            sendMenu(chatId, Messages.CONTEXT_MENU.messageText, Buttons.SUPPORT, Buttons.SAFETY, Buttons.HELP);
         } else if ((updateType == UpdateType.COMMAND &&
                 update.message().text().equalsIgnoreCase(Commands.SAFETY.commandText)) ||
                 (updateType == UpdateType.CALL_BACK_QUERY &&
                         update.callbackQuery().data().equals(Buttons.SAFETY.bCallBack))){
             sendMessage(chatId, Messages.SAFETY.messageText);
+        } else if ((updateType == UpdateType.COMMAND &&
+                update.message().text().equalsIgnoreCase(Commands.SUPPORT.commandText)) ||
+                (updateType == UpdateType.CALL_BACK_QUERY &&
+                        update.callbackQuery().data().equals(Buttons.SUPPORT.bCallBack))){
+            sendMessage(chatId, Messages.SUPPORT.messageText);
         }
 
     }
