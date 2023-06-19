@@ -10,7 +10,7 @@
     </parent>
     <groupId>net.vasilydemin</groupId>
     <artifactId>chat-gpt-telegram-bot</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.5</version>
     <name>chat-gpt-telegram-bot</name>
     <description>chat-gpt-telegram-bot</description>
     <properties>
