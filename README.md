@@ -18,7 +18,8 @@ To start application please use jar file from this repository. Last version is 0
 file:
 
 ```
-java -jar -D"openai.api.key={OpenAPIKey}" -D"telegram.bot.token={TelegramBotToken}"  
+java -jar -D"openai.api.key={OpenAPIKey}"  
+-D"telegram.bot.token={TelegramBotToken}"  
 -D"spring.datasource.username={database user name}"  
 -D"spring.datasource.password={database user password}"  
 -D"spring.datasource.url=jdbc:postgresql://{database server IP address}/{database name}"  
