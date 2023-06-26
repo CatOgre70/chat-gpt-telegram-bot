@@ -171,6 +171,12 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                 (updateType == UpdateType.CALL_BACK_QUERY &&
                         update.callbackQuery().data().equals(Buttons.SUPPORT.bCallBack))){
             sendMessage(chatId, Messages.SUPPORT.messageText);
+        } else if(updateType == UpdateType.COMMAND){
+            sendMessage(chatId, Messages.THERE_IS_NO_SUCH_COMMAND.messageText);
+            sendMessage(chatId, Messages.HELP.messageText);
+        } else if(updateType == UpdateType.PHOTO){
+            sendMessage(chatId, Messages.I_CANNOT_PROCESS_PHOTOS.messageText);
+            sendMessage(chatId, Messages.HELP.messageText);
         }
 
     }

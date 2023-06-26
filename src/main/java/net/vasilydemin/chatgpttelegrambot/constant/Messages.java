@@ -38,7 +38,8 @@ public enum Messages {
             Telegram Bot: Выберите, пожалуйста, действие или введите команду.
             /help - для списка команд
             /menu - для повторного вывода меню"""),
-    SUPPORT("Связаться с поддержкой вы можете написав сообщение по адресу https://t.me/CatOgre");
+    SUPPORT("Telegram Bot: Связаться с поддержкой вы можете написав сообщение по адресу https://t.me/CatOgre"),
+    I_CANNOT_PROCESS_PHOTOS("Telegram Bot: Вы отправили мне фото. Прикольное. Но я не знаю, что с ним делать :(");
 
     public final String messageText;
 
