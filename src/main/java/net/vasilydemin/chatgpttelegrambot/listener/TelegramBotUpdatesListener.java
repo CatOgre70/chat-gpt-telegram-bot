@@ -72,7 +72,6 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     public int process(List<Update> updates) {
         updates.forEach(update -> {
             // Processing updates
-            // logger.info("Processing update: {}", update);
             Long chatId = 0L;
             String firstName = null, lastName = null, nickName = null;
             ChatState chatState;
@@ -120,6 +119,14 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
 
+    /**
+     * Process Telegram update of existing user
+     * @param chatId - Telegram chat id of given update
+     * @param update - Telegram update
+     * @param updateType - update type from UpdateType enum
+     * @param user - user record from the database
+     * @param chatConfig - chat config record from the database
+     */
     private void existingUserUpdateProcessing(Long chatId, Update update, UpdateType updateType, User user, ChatConfig chatConfig) {
 
 
@@ -146,7 +153,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                 sendMessage(chatId, Messages.NO_RESPONSE.messageText);
             }
 
-            // send user back the first response
+            // send user back the first response from chatGPT
             sendMessage(chatId, response.getChoices().get(0).getMessage().getContent());
 
         } else if(updateType == UpdateType.COMMAND &&
@@ -182,7 +189,9 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     }
 
     /**
-     * user stage check
+     * Checking type of Telegram update
+     * @return UpdateType enum value
+     * @param update Telegram Update class object
      */
     private UpdateType checkingUpdate(Update update) {
         if (update.message() != null) {
@@ -207,10 +216,9 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     }
 
     /**
-     * tdepending on the incoming message, choose what to reply to the user
+     * Send message to Telegram user with chatId
      * @param chatId chat id
      * @param message message text to send
-     * record an event about sent message or an error
      */
     private void sendMessage(Long chatId, String message) {
         SendMessage sendMessage = new SendMessage(chatId, message);
@@ -222,6 +230,12 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         }
     }
 
+    /**
+     * Send menu to Telegram user with chatId
+     * @param chatId chat id
+     * @param menuHeader - menu header text to display before menu buttons
+     * @param buttons -  buttons array of Buttons type
+     */
     private void sendMenu(Long chatId, String menuHeader, Buttons... buttons) {
         InlineKeyboardButton[][] inlineKeyboardButtons = new InlineKeyboardButton[buttons.length][1];
         for(int i = 0; i < buttons.length; i++) {
