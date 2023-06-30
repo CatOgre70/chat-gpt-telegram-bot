@@ -17,8 +17,8 @@ Code for calling OpenAI API is based on the following Baeldung article: https://
 
 Telegram API Java library is https://github.com/pengrad/java-telegram-bot-api 
 
-To start application please use jar file from this repository. Last version is 0.5 Command line for starting jar
-file:
+To start application please use jar file from this repository. Last version is 0.51  
+Command line for starting jar file:
 
 ```
 java -jar -D"openai.api.key={OpenAPIKey}"  
